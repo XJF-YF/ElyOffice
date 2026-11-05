@@ -20,6 +20,7 @@ fn main() {
     }
     cc::Build::new()
         .file("shim/ely_mupdf.c")
+        .file("shim/ely_json.c")
         .file("shim/ely_pages.c")
         .file("shim/ely_insert.c")
         .file("shim/ely_text.c")

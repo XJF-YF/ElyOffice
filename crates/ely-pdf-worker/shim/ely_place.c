@@ -125,8 +125,11 @@ int ely_objects(fz_context *ctx, fz_document *doc, int number, unsigned char **d
 		buf = fz_new_buffer(ctx, 256);
 		fz_append_byte(ctx, buf, '[');
 		for (i = 0; i < n; i++)
-			fz_append_printf(ctx, buf, "%s{\"kind\":\"%s\",\"rect\":[%g,%g,%g,%g]}", i ? "," : "",
-				list[i].form ? "form" : "image", list[i].rect.x0, list[i].rect.y0, list[i].rect.x1, list[i].rect.y1);
+		{
+			fz_append_printf(ctx, buf, "%s{\"kind\":\"%s\",\"rect\":", i ? "," : "", list[i].form ? "form" : "image");
+			ely_json_append_rect(ctx, buf, list[i].rect);
+			fz_append_byte(ctx, buf, '}');
+		}
 		fz_append_byte(ctx, buf, ']');
 		*len = fz_buffer_extract(ctx, buf, data);
 	}

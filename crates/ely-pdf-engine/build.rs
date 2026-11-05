@@ -4,6 +4,7 @@ fn main() {
     let mut stamp: u64 = 0xcbf2_9ce4_8422_2325;
     for source in [
         "../ely-pdf-worker/shim/ely_mupdf.c",
+        "../ely-pdf-worker/shim/ely_json.c",
         "../ely-pdf-worker/shim/ely_pages.c",
         "../ely-pdf-worker/shim/ely_insert.c",
         "../ely-pdf-worker/shim/ely_text.c",

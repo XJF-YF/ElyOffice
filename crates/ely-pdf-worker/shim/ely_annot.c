@@ -427,8 +427,9 @@ static void write_annot(fz_context *ctx, fz_output *out, pdf_annot *annot)
 	fz_rect r = pdf_bound_annot(ctx, annot);
 	fz_write_printf(ctx, out, "{\"id\":%d,\"kind\":", pdf_to_num(ctx, pdf_annot_obj(ctx, annot)));
 	ely_json_string(ctx, out, pdf_string_from_annot_type(ctx, pdf_annot_type(ctx, annot)));
-	fz_write_printf(ctx, out, ",\"rect\":[%g,%g,%g,%g],\"color\":%d,\"contents\":", r.x0, r.y0, r.x1, r.y1,
-		rgb_of(ctx, annot));
+	fz_write_string(ctx, out, ",\"rect\":");
+	ely_json_rect(ctx, out, r);
+	fz_write_printf(ctx, out, ",\"color\":%d,\"contents\":", rgb_of(ctx, annot));
 	ely_json_string(ctx, out, pdf_annot_contents(ctx, annot));
 	fz_write_string(ctx, out, ",\"author\":");
 	ely_json_string(ctx, out, pdf_annot_has_author(ctx, annot) ? pdf_annot_author(ctx, annot) : "");
